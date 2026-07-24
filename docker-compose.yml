@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        # URL pública de tu API de shrtn-api ya desplegada (API Gateway).
+        # En local (sam local start-api) sería http://localhost:3000
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:3000}
+    container_name: shrtn-dashboard-web
+    networks:
+      - cf-edge
+    restart: unless-stopped
+
+networks:
+  cf-edge:
+    external: true
